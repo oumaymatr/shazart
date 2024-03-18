@@ -12,38 +12,14 @@ class MySplash extends StatefulWidget {
 class _MySplashState extends State<MySplash> {
   @override
   Widget build(BuildContext context) {
-    return Stack(children: [
-      Image.asset(
-        'assets/images/background-splash.png',
-        fit: BoxFit.cover,
-        width: double.infinity,
-        height: double.infinity,
-      ),
-      FlutterSplashScreen.gif(
-        useImmersiveMode: true,
-        gifPath: 'assets/images/frida-splash.gif',
-        gifWidth: 269,
-        gifHeight: 474,
-        nextScreen: const Welcome(),
-        duration: const Duration(milliseconds: 10000),
-        backgroundColor: Color(0xFFE3E3E2),
-      ),
-    ]);
-    // return FlutterSplashScreen.fadeIn(
-    //   backgroundColor: Colors.white,
-    //   onInit: () {
-    //     debugPrint("On Init");
-    //   },
-    //   onEnd: () {
-    //     debugPrint("On End");
-    //   },
-    //   childWidget: SizedBox(
-    //     height: 200,
-    //     width: 200,
-    //     child: Image.asset("assets/images/frida.jpg"),
-    //   ),
-    //   onAnimationEnd: () => debugPrint("On Fade In End"),
-    //   nextScreen: const Welcome(),
-    // );
+    return FlutterSplashScreen.gif(
+      useImmersiveMode: true,
+      gifPath: 'assets/images/giphy.gif',
+      gifWidth: 100,
+      gifHeight: 200,
+      nextScreen: const Welcome(),
+      duration: const Duration(milliseconds: 3000),
+      backgroundColor: const Color(0xFFF9F4F3),
+    );
   }
 }

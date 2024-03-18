@@ -39,9 +39,9 @@ class _WelcomeState extends State<Welcome> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
-                      height: 350,
+                      height: 300,
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(600),
+                        borderRadius: BorderRadius.circular(800),
                         child: Image.asset("assets/images/frida-welcome.jpg"),
                       ),
                     ),
@@ -49,7 +49,7 @@ class _WelcomeState extends State<Welcome> {
                       "SHAZART",
                       style: TextStyle(
                         fontFamily: "ZenOldMincho",
-                        fontSize: 50.0,
+                        fontSize: 40.0,
                         color: Color(0xFF2D2D42),
                       ),
                     ),
@@ -57,7 +57,7 @@ class _WelcomeState extends State<Welcome> {
                       "Discover Artists, Dive into Their Stories,",
                       style: TextStyle(
                         // fontFamily: "ZenOldMincho",
-                        fontSize: 20.0,
+                        fontSize: 10.0,
                         // color: Color(0xFF0A2865),
                       ),
                     ),
@@ -65,12 +65,12 @@ class _WelcomeState extends State<Welcome> {
                       "and Embrace the Beauty of Art.",
                       style: TextStyle(
                         // fontFamily: "ZenOldMincho",
-                        fontSize: 20.0,
+                        fontSize: 10.0,
                         // color: Color(0xFF0A2865),
                       ),
                     ),
                     const SizedBox(
-                      height: 40,
+                      height: 50,
                     ),
                     ElevatedButton(
                       onPressed: () {
@@ -86,19 +86,22 @@ class _WelcomeState extends State<Welcome> {
                           borderRadius: BorderRadius.circular(100),
                         ),
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 30, vertical: 20),
+                            horizontal: 20, vertical: 20),
                       ),
                       child: const Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Icon(Icons.arrow_forward_ios_rounded,
-                              color: Colors.white),
+                          Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            color: Colors.white,
+                            size: 15,
+                          ),
                           SizedBox(width: 5),
                           Text(
                             "Start Discovering",
                             style: TextStyle(
                                 fontFamily: "ZenOldMincho",
-                                fontSize: 20.0,
+                                fontSize: 15.0,
                                 color: Colors.white),
                           ),
                         ],
