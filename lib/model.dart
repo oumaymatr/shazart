@@ -66,67 +66,89 @@ class _ModelState extends State<Model> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey,
-      body: Container(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(
-              height: 50,
+      body: Stack(
+        children: [
+          // Background Image
+          Positioned.fill(
+            child:
+                Image.asset("assets/images/paintings.png", fit: BoxFit.cover),
+          ),
+          Positioned.fill(
+            child: Container(
+              color: Colors.white.withOpacity(0.2), // Adjust opacity as needed
             ),
-            const Text("teachable machine"),
-            const SizedBox(
-              height: 6,
-            ),
-            Center(
-              child: _loading
-                  ? Column(
-                      children: [
-                        Image.asset(
-                          "assets/images/frida.jpg",
-                          height: 300,
-                          width: 100,
-                        )
-                      ],
-                    )
-                  : Column(
-                      children: [
-                        SizedBox(
-                          height: 250,
-                          child: Image.file(_image),
-                        ),
-                        const SizedBox(height: 20),
-                        _output != null
-                            ? Text(
-                                '${_output?[0]['label']}',
-                                style: const TextStyle(color: Colors.red),
-                              )
-                            : Container()
-                      ],
-                    ),
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: Column(
-                children: [
-                  GestureDetector(
-                    onTap: pickImage,
-                    child: Container(
-                      width: MediaQuery.of(context).size.width - 260,
-                      alignment: Alignment.center,
-                      padding: const EdgeInsets.all(20),
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 20),
-                      decoration: const BoxDecoration(color: Colors.red),
-                      child: const Text("Select Image"),
-                    ),
+          ),
+
+          // Content
+          Container(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Center(
+                    child: _loading
+                        ? SizedBox(
+                            height: 100,
+                            width: 100,
+                            child:
+                                Container(), // Empty container to maintain space
+                          )
+                        : Column(
+                            children: [
+                              SizedBox(
+                                height: 250,
+                                child: Image.file(_image),
+                              ),
+                              const SizedBox(height: 20),
+                              _output != null
+                                  ? Text(
+                                      '${_output?[0]['label']}',
+                                      style:
+                                          const TextStyle(color: Colors.pink),
+                                    )
+                                  : Container()
+                            ],
+                          ),
                   ),
-                ],
-              ),
+                ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(90.0),
+                        child: GestureDetector(
+                          onTap: pickImage,
+                          child: Container(
+                            width: MediaQuery.of(context).size.width - 180,
+                            alignment: Alignment.center,
+                            padding: const EdgeInsets.all(20),
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: 5, vertical: 5),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFF80B2BE),
+                              borderRadius: BorderRadius.circular(40),
+                            ),
+                            child: Text(
+                              "Select Image",
+                              maxLines: 1,
+                              style: TextStyle(
+                                  fontFamily: "ZenOldMincho",
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
