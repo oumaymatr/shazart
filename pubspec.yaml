@@ -84,6 +84,9 @@ flutter:
      - family: ZenOldMincho
        fonts:
          - asset: fonts/ZenOldMincho-Regular.ttf
+     - family: MrDafoe
+       fonts:
+         - asset: fonts/MrDafoe-Regular.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

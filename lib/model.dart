@@ -81,7 +81,7 @@ class _ModelState extends State<Model> {
 
           // Content
           Container(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.all(0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -94,20 +94,78 @@ class _ModelState extends State<Model> {
                             child:
                                 Container(), // Empty container to maintain space
                           )
-                        : Column(
+                        : Stack(
                             children: [
-                              SizedBox(
-                                height: 250,
-                                child: Image.file(_image),
+                              Positioned(
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(50),
+                                    bottomRight: Radius.circular(50),
+                                  ),
+                                  child: Container(
+                                    color: Colors.black.withOpacity(
+                                        0.8), // Adjust opacity as needed
+                                  ),
+                                ),
                               ),
-                              const SizedBox(height: 20),
-                              _output != null
-                                  ? Text(
-                                      '${_output?[0]['label']}',
-                                      style:
-                                          const TextStyle(color: Colors.pink),
+                              Positioned.fill(
+                                child: Column(
+                                  children: [
+                                    SizedBox(
+                                      height: 50,
+                                    ),
+                                    SizedBox(
+                                      height: 250,
+                                      child: Image.file(_image),
+                                    ),
+                                    const SizedBox(height: 20),
+                                    _output != null
+                                        ? Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                "It's a painting of  ",
+                                                style: const TextStyle(
+                                                    color: Colors.white,
+                                                    fontFamily: "ZenOldMincho"),
+                                              ),
+                                              Text(
+                                                '${_output?[0]['label']}',
+                                                style: const TextStyle(
+                                                    color: Colors.white,
+                                                    fontFamily: "MrDafoe",
+                                                    fontSize: 30),
+                                              ),
+                                            ],
+                                          )
+                                        : Container(),
+                                    const SizedBox(height: 30),
+                                    ElevatedButton(
+                                      onPressed: () {},
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor:
+                                            const Color(0xFF80B2BE),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                        ),
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 20, vertical: 20),
+                                      ),
+                                      child: Text(
+                                        "See more of this artist",
+                                        style: TextStyle(
+                                          fontFamily: "ZenOldMincho",
+                                          fontSize: 15.0,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                        ),
+                                      ),
                                     )
-                                  : Container()
+                                  ],
+                                ),
+                              ),
                             ],
                           ),
                   ),
