@@ -17,7 +17,7 @@ class _BottomBarState extends State<BottomBar> {
   final navigationKey = GlobalKey<CurvedNavigationBarState>();
   int index = 0;
   final screens = [
-    const Home(),
+    Home(),
     const Search(),
     const Model(),
     const Forum(),

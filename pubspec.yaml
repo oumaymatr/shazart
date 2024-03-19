@@ -87,6 +87,9 @@ flutter:
      - family: MrDafoe
        fonts:
          - asset: fonts/MrDafoe-Regular.ttf
+     - family: Whisper
+       fonts:
+         - asset: fonts/Whisper-Regular.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

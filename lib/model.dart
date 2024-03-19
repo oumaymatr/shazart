@@ -104,7 +104,7 @@ class _ModelState extends State<Model> {
                                   ),
                                   child: Container(
                                     color: Colors.black.withOpacity(
-                                        0.8), // Adjust opacity as needed
+                                        0.7), // Adjust opacity as needed
                                   ),
                                 ),
                               ),
@@ -116,7 +116,10 @@ class _ModelState extends State<Model> {
                                     ),
                                     SizedBox(
                                       height: 250,
-                                      child: Image.file(_image),
+                                      child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          child: Image.file(_image)),
                                     ),
                                     const SizedBox(height: 20),
                                     _output != null
@@ -207,6 +210,31 @@ class _ModelState extends State<Model> {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class PaintingBox extends StatelessWidget {
+  final File image;
+
+  const PaintingBox({required this.image});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.white, width: 2), // Painting frame
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(
+            18), // Make it slightly smaller than the frame
+        child: SizedBox(
+          height: 250, // Adjust height as needed
+          width: 250, // Adjust width as needed
+          child: Image.file(image),
+        ),
       ),
     );
   }
