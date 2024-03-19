@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 
 class ArtistGallery extends StatelessWidget {
@@ -93,7 +92,10 @@ class FullScreenImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      backgroundColor: Color(0xFFF4EADB),
+      appBar: AppBar(
+        backgroundColor: Color(0xFFF4EADB),
+      ),
       body: Center(
         child: Image.asset(
           imagePath,

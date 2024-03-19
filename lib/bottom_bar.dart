@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'history.dart';
-import 'search.dart';
 import 'forum.dart';
 import 'model.dart';
 import 'home.dart';
@@ -17,8 +16,8 @@ class _BottomBarState extends State<BottomBar> {
   final navigationKey = GlobalKey<CurvedNavigationBarState>();
   int index = 0;
   final screens = [
-    Home(),
-    const Search(),
+    Home(selectedIndex: 0),
+    Home(selectedIndex: 1),
     const Model(),
     const Forum(),
     const History()

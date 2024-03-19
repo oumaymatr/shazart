@@ -3,11 +3,16 @@ import 'artists_data.dart';
 import 'artist_gallery.dart';
 
 class Home extends StatefulWidget {
+  final int selectedIndex;
+
+  const Home({Key? key, required this.selectedIndex}) : super(key: key);
   @override
   State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
+  TextEditingController searchController = TextEditingController();
+  String searchText = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,20 +30,59 @@ class _HomeState extends State<Home> {
               ),
             ),
           ),
+          if (widget.selectedIndex ==
+              1) // Show search bar only if 'Search' is selected
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: TextField(
+                controller: searchController,
+                decoration: InputDecoration(
+                  hintText: 'Search artist...',
+                  prefixIcon: Icon(Icons.search, color: Colors.grey),
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(50),
+                    borderSide: BorderSide.none,
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(50),
+                    borderSide: BorderSide.none,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(50),
+                    borderSide: BorderSide.none,
+                  ),
+                ),
+                onChanged: (value) {
+                  setState(() {
+                    searchText = value;
+                  });
+                },
+              ),
+            ),
           Expanded(
             child: ListView.builder(
               itemCount: artists.length,
               itemBuilder: (context, index) {
-                return CardArtist(
-                  painterName: artists[index]['painterName']!,
-                  painterPhoto: artists[index]['painterPhoto']!,
-                  backgroundImage: artists[index]['backgroundImage']!,
-                  years: artists[index]['years']!,
-                  country: artists[index]['country']!,
-                  text: artists[index]['text']!,
-                  artistName: artists[index]['painterName']!,
-                  imagePaths: artists[index]['imagePaths']!,
-                );
+                // Filter artists based on search text
+                if (searchText.isEmpty ||
+                    artists[index]['painterName']!
+                        .toLowerCase()
+                        .contains(searchText.toLowerCase())) {
+                  return CardArtist(
+                    painterName: artists[index]['painterName']!,
+                    painterPhoto: artists[index]['painterPhoto']!,
+                    backgroundImage: artists[index]['backgroundImage']!,
+                    years: artists[index]['years']!,
+                    country: artists[index]['country']!,
+                    text: artists[index]['text']!,
+                    artistName: artists[index]['painterName']!,
+                    imagePaths: artists[index]['imagePaths']!,
+                  );
+                } else {
+                  return SizedBox.shrink();
+                }
               },
             ),
           ),
