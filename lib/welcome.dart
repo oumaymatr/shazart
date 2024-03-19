@@ -56,17 +56,13 @@ class _WelcomeState extends State<Welcome> {
                     const Text(
                       "Discover Artists, Dive into Their Stories,",
                       style: TextStyle(
-                        // fontFamily: "ZenOldMincho",
                         fontSize: 10.0,
-                        // color: Color(0xFF0A2865),
                       ),
                     ),
                     const Text(
                       "and Embrace the Beauty of Art.",
                       style: TextStyle(
-                        // fontFamily: "ZenOldMincho",
                         fontSize: 10.0,
-                        // color: Color(0xFF0A2865),
                       ),
                     ),
                     const SizedBox(

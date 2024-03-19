@@ -79,6 +79,18 @@ flutter:
   assets:
      - assets/
      - assets/images/
+     - assets/images/Andy_Warhol/
+     - assets/images/Claude_Monet/
+     - assets/images/Eugene_Delacroix/
+     - assets/images/Francisco_Goya/
+     - assets/images/Frida_Kahlo/
+     - assets/images/Leonardo_da_Vinci/
+     - assets/images/Michelangelo/
+     - assets/images/Pablo_Picasso/
+     - assets/images/Paul_Cezanne/
+     - assets/images/Raphael/
+     - assets/images/Salvador_Dali/
+     - assets/images/Vincent_van_Gogh/
 
   fonts:
      - family: ZenOldMincho

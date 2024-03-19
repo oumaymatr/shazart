@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'artists_data.dart';
+import 'artist_gallery.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -35,6 +36,8 @@ class _HomeState extends State<Home> {
                   years: artists[index]['years']!,
                   country: artists[index]['country']!,
                   text: artists[index]['text']!,
+                  artistName: artists[index]['painterName']!,
+                  imagePaths: artists[index]['imagePaths']!,
                 );
               },
             ),
@@ -52,6 +55,8 @@ class CardArtist extends StatelessWidget {
   final String years;
   final String country;
   final String text;
+  final String artistName;
+  final List<String> imagePaths;
 
   const CardArtist({
     Key? key,
@@ -61,6 +66,8 @@ class CardArtist extends StatelessWidget {
     required this.years,
     required this.country,
     required this.text,
+    required this.artistName,
+    required this.imagePaths,
   }) : super(key: key);
 
   @override
@@ -70,10 +77,9 @@ class CardArtist extends StatelessWidget {
         margin: EdgeInsets.symmetric(horizontal: 16),
         child: Card(
           color: Colors.transparent,
-          elevation: 5, // Adding some elevation for a shadow effect
+          elevation: 5,
           child: Stack(
             children: [
-              // Background image
               Positioned.fill(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20), // Adjust as needed
@@ -89,7 +95,6 @@ class CardArtist extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                     color: Colors.white12.withOpacity(0.6),
                   ),
-                  // Adjust opacity as needed
                 ),
               ),
               // Content
@@ -104,8 +109,7 @@ class CardArtist extends StatelessWidget {
                           fontFamily: "Whisper",
                           fontSize: 30,
                           fontWeight: FontWeight.w300,
-                          color: Colors
-                              .black, // Adjust text color to contrast with background
+                          color: Colors.black,
                         ),
                       ),
                     ),
@@ -113,10 +117,8 @@ class CardArtist extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            Icon(Icons.location_on,
-                                color: Colors.white), // Icon
-                            SizedBox(
-                                width: 8), // Add spacing between icon and text
+                            Icon(Icons.location_on, color: Colors.white),
+                            SizedBox(width: 8),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -126,8 +128,7 @@ class CardArtist extends StatelessWidget {
                                     fontSize: 15,
                                     fontFamily: "ZenOldMincho",
                                     fontWeight: FontWeight.bold,
-                                    color: Colors
-                                        .white, // Adjust text color to contrast with background
+                                    color: Colors.white,
                                   ),
                                 ),
                                 Text(
@@ -136,8 +137,7 @@ class CardArtist extends StatelessWidget {
                                     fontSize: 15,
                                     fontFamily: "ZenOldMincho",
                                     fontWeight: FontWeight.bold,
-                                    color: Colors
-                                        .white, // Adjust text color to contrast with background
+                                    color: Colors.white,
                                   ),
                                 ),
                               ],
@@ -150,8 +150,8 @@ class CardArtist extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.only(top: 25.0),
                               child: SizedBox(
-                                width: 20, // Adjust as needed
-                                height: 20, // Adjust as needed
+                                width: 20,
+                                height: 20,
                                 child: Image.asset(
                                   'assets/images/brush.png',
                                   fit: BoxFit.contain,
@@ -160,7 +160,7 @@ class CardArtist extends StatelessWidget {
                             ),
                             SizedBox(
                               width: 2,
-                            ), // Add spacing between icon and text
+                            ),
                             Expanded(
                               child: DescriptionTextWidget(
                                 text: text,
@@ -174,6 +174,25 @@ class CardArtist extends StatelessWidget {
                             ),
                           ],
                         ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ArtistGallery(
+                                  artistName: artistName,
+                                  imagePaths: imagePaths,
+                                ),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            "Visit Gallery",
+                            style: TextStyle(
+                                color: Colors.black45,
+                                fontFamily: "ZenOldMincho"),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -181,12 +200,11 @@ class CardArtist extends StatelessWidget {
               ),
               // Avatar
               Positioned(
-                top: 35, // Adjust as needed
-                right: 10, // Adjust as needed
+                top: 35,
+                right: 10,
                 child: CircleAvatar(
-                  radius: 40, // Adjust as needed
-                  backgroundColor:
-                      Colors.white.withOpacity(0.8), // Adjust opacity if needed
+                  radius: 40,
+                  backgroundColor: Colors.white.withOpacity(0.8),
                   backgroundImage: AssetImage(
                     painterPhoto,
                   ),
