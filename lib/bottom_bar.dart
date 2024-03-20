@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:provider/provider.dart';
 import 'history.dart';
 import 'forum.dart';
 import 'model.dart';
 import 'home.dart';
+import 'main.dart';
 
 class BottomBar extends StatefulWidget {
   const BottomBar({super.key});
@@ -47,6 +49,10 @@ class _BottomBarState extends State<BottomBar> {
           items: items,
           onTap: (index) => setState(() {
             this.index = index;
+            if (index == 0) {
+              Provider.of<SearchTextProvider>(context, listen: false)
+                  .clearSearchText();
+            }
           }),
         ),
       ),

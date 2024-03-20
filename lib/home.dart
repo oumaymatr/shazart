@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'artists_data.dart';
 import 'artist_gallery.dart';
+import 'package:provider/provider.dart';
+import 'main.dart';
 
 class Home extends StatefulWidget {
   final int selectedIndex;
@@ -12,9 +14,11 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   TextEditingController searchController = TextEditingController();
-  String searchText = '';
+
   @override
   Widget build(BuildContext context) {
+    var searchTextProvider = Provider.of<SearchTextProvider>(context);
+    String searchText = searchTextProvider.searchText;
     return Scaffold(
       backgroundColor: Color(0xFFF4EADB),
       body: Column(
@@ -56,7 +60,7 @@ class _HomeState extends State<Home> {
                 ),
                 onChanged: (value) {
                   setState(() {
-                    searchText = value;
+                    searchTextProvider.setSearchText(value);
                   });
                 },
               ),
