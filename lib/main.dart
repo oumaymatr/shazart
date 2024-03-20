@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'splash_screen.dart';
 import 'package:provider/provider.dart';
+import 'components/search_text.dart';
+import 'components/search_history.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => SearchTextProvider(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => SearchTextProvider()),
+        ChangeNotifierProvider(create: (_) => SearchHistoryProvider()),
+      ],
       child: MyApp(),
     ),
   );
@@ -21,23 +26,6 @@ class MyApp extends StatelessWidget {
       title: 'Shazart',
       home: MySplash(),
       debugShowCheckedModeBanner: false,
-      // Provider.of<SearchText>(context).searchText
     );
-  }
-}
-
-class SearchTextProvider extends ChangeNotifier {
-  String _searchText = '';
-
-  String get searchText => _searchText;
-
-  void setSearchText(String newText) {
-    _searchText = newText;
-    notifyListeners(); // Notify listeners of the change
-  }
-
-  void clearSearchText() {
-    _searchText = '';
-    notifyListeners(); // Notify listeners of the change
   }
 }

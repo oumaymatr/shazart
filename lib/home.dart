@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'artists_data.dart';
+import 'data/artists_data.dart';
 import 'artist_gallery.dart';
 import 'package:provider/provider.dart';
-import 'main.dart';
+import 'components/search_text.dart';
 
 class Home extends StatefulWidget {
   final int selectedIndex;
@@ -34,8 +34,7 @@ class _HomeState extends State<Home> {
               ),
             ),
           ),
-          if (widget.selectedIndex ==
-              1) // Show search bar only if 'Search' is selected
+          if (widget.selectedIndex == 1)
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: TextField(

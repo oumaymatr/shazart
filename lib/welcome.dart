@@ -77,7 +77,7 @@ class _WelcomeState extends State<Welcome> {
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF2D2D42),
+                        backgroundColor: const Color(0xFF80B2BE),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(100),
                         ),

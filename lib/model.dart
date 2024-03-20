@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:tflite/tflite.dart';
 import 'package:file_picker/file_picker.dart';
+import 'components/search_history.dart';
+import 'package:provider/provider.dart';
 
 class Model extends StatefulWidget {
   const Model({Key? key}) : super(key: key);
@@ -59,7 +61,15 @@ class _ModelState extends State<Model> {
       setState(() {
         _image = file;
       });
-      classifyImage(_image);
+      await classifyImage(_image);
+      Provider.of<SearchHistoryProvider>(context, listen: false)
+          .addToSearchHistory(
+        SearchHistory(
+          image: _image,
+          artistName: _output?[0]['label'] ?? 'Unknown',
+          dateTime: DateTime.now(),
+        ),
+      );
     }
   }
 

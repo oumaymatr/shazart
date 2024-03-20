@@ -5,7 +5,7 @@ import 'history.dart';
 import 'forum.dart';
 import 'model.dart';
 import 'home.dart';
-import 'main.dart';
+import 'components/search_text.dart';
 
 class BottomBar extends StatefulWidget {
   const BottomBar({super.key});
@@ -27,11 +27,15 @@ class _BottomBarState extends State<BottomBar> {
   @override
   Widget build(BuildContext context) {
     final items = <Widget>[
-      const Icon(Icons.home_rounded, size: 30),
-      const Icon(Icons.search, size: 30),
-      const Icon(Icons.insert_photo_outlined, size: 30),
-      const Icon(Icons.chat_bubble_outline_outlined, size: 27),
-      const Icon(Icons.history_rounded, size: 30),
+      Icon(Icons.home_rounded,
+          size: 30, color: index == 0 ? Colors.white : null),
+      Icon(Icons.search, size: 30, color: index == 1 ? Colors.white : null),
+      Icon(Icons.insert_photo_outlined,
+          size: 30, color: index == 2 ? Colors.white : null),
+      Icon(Icons.chat_bubble_outline_outlined,
+          size: 27, color: index == 3 ? Colors.white : null),
+      Icon(Icons.history_rounded,
+          size: 30, color: index == 4 ? Colors.white : null),
     ];
     return SafeArea(
       top: false,
@@ -40,6 +44,7 @@ class _BottomBarState extends State<BottomBar> {
         backgroundColor: Colors.red,
         body: screens[index],
         bottomNavigationBar: CurvedNavigationBar(
+          buttonBackgroundColor: Color(0xFF80B2BE),
           key: navigationKey,
           backgroundColor: Colors.transparent,
           height: 60,
