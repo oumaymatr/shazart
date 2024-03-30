@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'splash_screen.dart';
 import 'package:provider/provider.dart';
 import 'components/search_text.dart';
-import 'components/search_history.dart';
 import 'firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -13,13 +12,7 @@ void main() async {
   FirebaseFirestore.instance.settings =
       const Settings(persistenceEnabled: true);
   runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => SearchTextProvider()),
-        ChangeNotifierProvider(create: (_) => SearchHistoryProvider()),
-      ],
-      child: MyApp(),
-    ),
+    ChangeNotifierProvider(create: (_) => SearchTextProvider(), child: MyApp()),
   );
 }
 

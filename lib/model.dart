@@ -2,8 +2,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:tflite/tflite.dart';
 import 'package:file_picker/file_picker.dart';
-import 'components/search_history.dart';
-import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Model extends StatefulWidget {
@@ -69,14 +67,6 @@ class _ModelState extends State<Model> {
         'artist': _output?[0]['label'] ?? 'Unknown',
         'date': Timestamp.now(), // Storing current timestamp
       });
-      Provider.of<SearchHistoryProvider>(context, listen: false)
-          .addToSearchHistory(
-        SearchHistory(
-          image: _image,
-          artistName: _output?[0]['label'] ?? 'Unknown',
-          dateTime: DateTime.now(),
-        ),
-      );
     }
   }
 
