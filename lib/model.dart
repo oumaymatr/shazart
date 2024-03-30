@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:tflite/tflite.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'artist_gallery.dart';
+import 'data/artists_data.dart';
 
 class Model extends StatefulWidget {
   const Model({Key? key}) : super(key: key);
@@ -152,7 +154,25 @@ class _ModelState extends State<Model> {
                                         : Container(),
                                     const SizedBox(height: 30),
                                     ElevatedButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => ArtistGallery(
+                                              artistName: _output?[0]
+                                                      ['label'] ??
+                                                  'Unknown',
+                                              imagePaths: artists.firstWhere(
+                                                    (artist) =>
+                                                        artist['painterName'] ==
+                                                        _output?[0]['label'],
+                                                    orElse: () => {},
+                                                  )['imagePaths'] ??
+                                                  [],
+                                            ),
+                                          ),
+                                        );
+                                      },
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor:
                                             const Color(0xFF80B2BE),
