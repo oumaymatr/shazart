@@ -4,6 +4,7 @@ import 'package:tflite/tflite.dart';
 import 'package:file_picker/file_picker.dart';
 import 'components/search_history.dart';
 import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Model extends StatefulWidget {
   const Model({Key? key}) : super(key: key);
@@ -13,6 +14,7 @@ class Model extends StatefulWidget {
 }
 
 class _ModelState extends State<Model> {
+  final _firestore = FirebaseFirestore.instance;
   bool _loading = true;
   late File _image;
   List? _output;
@@ -62,6 +64,11 @@ class _ModelState extends State<Model> {
         _image = file;
       });
       await classifyImage(_image);
+      _firestore.collection('history').add({
+        'image': _image.path, // Example: storing image path
+        'artist': _output?[0]['label'] ?? 'Unknown',
+        'date': Timestamp.now(), // Storing current timestamp
+      });
       Provider.of<SearchHistoryProvider>(context, listen: false)
           .addToSearchHistory(
         SearchHistory(
