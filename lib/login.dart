@@ -184,6 +184,9 @@ class _LoginState extends State<Login> {
                         });
                       }
                     } catch (e) {
+                      setState(() {
+                        showSpinner = false;
+                      });
                       showDialog(
                         context: context,
                         builder: (BuildContext context) {
