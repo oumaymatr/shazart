@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'components/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'forum.dart';
 
@@ -13,10 +13,24 @@ class Register extends StatelessWidget {
   late String password;
 
   // register user method
-  void registerUser() {}
 
   @override
   Widget build(BuildContext context) {
+    Future<void> _signInWithGoogle() async {
+      try {
+        await AuthService()
+            .signInWithGoogle(); // Call signInWithGoogle from AuthService
+        // Navigate to the forum page after successful sign-in
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => Forum()),
+        );
+      } catch (e) {
+        print("Error signing in with Google: $e");
+        // Handle sign-in errors here
+      }
+    }
+
     return Scaffold(
       backgroundColor: Color(0xFFF4EADB),
       body: SafeArea(
@@ -180,19 +194,50 @@ class Register extends StatelessWidget {
               Flexible(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children: [
                     // google button
-                    SquareTile(imagePath: 'assets/images/google.png'),
+                    SquareTile(
+                        onTap: () => _signInWithGoogle(),
+                        imagePath: 'assets/images/google.png'),
 
                     SizedBox(width: 15),
 
                     // facebook button
-                    SquareTile(imagePath: 'assets/images/facebook.png')
+                    SquareTile(
+                        onTap: () => {},
+                        imagePath: 'assets/images/facebook.png')
                   ],
                 ),
               ),
 
               SizedBox(height: 20),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Already have an account?',
+                    style: TextStyle(
+                      color: Colors.grey[700],
+                      fontFamily: "ZenOldMincho",
+                    ),
+                  ),
+                  SizedBox(width: 2),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      'Login now',
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "ZenOldMincho",
+                      ),
+                    ),
+                  ),
+                ],
+              )
             ],
           ),
         ),
@@ -203,24 +248,28 @@ class Register extends StatelessWidget {
 
 class SquareTile extends StatelessWidget {
   final String imagePath;
-
+  final Function()? onTap;
   const SquareTile({
     Key? key,
     required this.imagePath,
+    required this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(15),
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.white),
-        borderRadius: BorderRadius.circular(12),
-        color: Colors.grey[200],
-      ),
-      child: Image.asset(
-        imagePath,
-        height: 35,
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.all(15),
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.white),
+          borderRadius: BorderRadius.circular(12),
+          color: Colors.grey[200],
+        ),
+        child: Image.asset(
+          imagePath,
+          height: 35,
+        ),
       ),
     );
   }

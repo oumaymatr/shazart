@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'register.dart';
 import 'forum.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'components/auth.dart';
 
 class Login extends StatefulWidget {
   Login({Key? key});
@@ -23,9 +24,20 @@ class _LoginState extends State<Login> {
   late String password;
 
   bool showSpinner = false;
-
-  // sign user in method
-  void signUserIn() {}
+  Future<void> _signInWithGoogle() async {
+    try {
+      await AuthService()
+          .signInWithGoogle(); // Call signInWithGoogle from AuthService
+      // Navigate to the forum page after successful sign-in
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => Forum()),
+      );
+    } catch (e) {
+      print("Error signing in with Google: $e");
+      // Handle sign-in errors here
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -252,14 +264,20 @@ class _LoginState extends State<Login> {
                 Flexible(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
+                    children: [
                       // google button
-                      SquareTile(imagePath: 'assets/images/google.png'),
+                      SquareTile(
+                          onTap: () async {
+                            await _signInWithGoogle();
+                          },
+                          imagePath: 'assets/images/google.png'),
 
                       SizedBox(width: 15),
 
                       // facebook button
-                      SquareTile(imagePath: 'assets/images/facebook.png')
+                      SquareTile(
+                          onTap: () => {},
+                          imagePath: 'assets/images/facebook.png')
                     ],
                   ),
                 ),
@@ -307,24 +325,28 @@ class _LoginState extends State<Login> {
 
 class SquareTile extends StatelessWidget {
   final String imagePath;
-
+  final Function()? onTap;
   const SquareTile({
     Key? key,
     required this.imagePath,
+    required this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(15),
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.white),
-        borderRadius: BorderRadius.circular(12),
-        color: Colors.grey[200],
-      ),
-      child: Image.asset(
-        imagePath,
-        height: 35,
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.all(15),
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.white),
+          borderRadius: BorderRadius.circular(12),
+          color: Colors.grey[200],
+        ),
+        child: Image.asset(
+          imagePath,
+          height: 35,
+        ),
       ),
     );
   }
