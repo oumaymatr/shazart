@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:provider/provider.dart';
 import 'history.dart';
-import 'forum.dart';
+import 'login.dart';
 import 'model.dart';
 import 'home.dart';
 import 'components/search_text.dart';
@@ -21,7 +21,7 @@ class _BottomBarState extends State<BottomBar> {
     Home(selectedIndex: 0),
     Home(selectedIndex: 1),
     const Model(),
-    const Forum(),
+    Login(),
     const History()
   ];
   @override
