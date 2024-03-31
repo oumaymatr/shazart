@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">shazart</string>
+    <string name="facebook_app_id">949319730150123</string>
+    <string name="fb_login_protocol_scheme">fb949319730150123</string>
+    <string name="facebook_client_token">fd7c31a760b38e64ed8424105b95d598</string>
+</resources>
+

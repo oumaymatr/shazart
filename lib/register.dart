@@ -31,6 +31,21 @@ class Register extends StatelessWidget {
       }
     }
 
+    Future<void> _signInWithFacebook() async {
+      try {
+        await AuthService()
+            .signInWithFacebook(); // Call signInWithGoogle from AuthService
+        // Navigate to the forum page after successful sign-in
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => Forum()),
+        );
+      } catch (e) {
+        print("Error signing in with Facebook: $e");
+        // Handle sign-in errors here
+      }
+    }
+
     return Scaffold(
       backgroundColor: Color(0xFFF4EADB),
       body: SafeArea(
@@ -204,7 +219,7 @@ class Register extends StatelessWidget {
 
                     // facebook button
                     SquareTile(
-                        onTap: () => {},
+                        onTap: () => _signInWithFacebook(),
                         imagePath: 'assets/images/facebook.png')
                   ],
                 ),

@@ -39,6 +39,21 @@ class _LoginState extends State<Login> {
     }
   }
 
+  Future<void> _signInWithFacebook() async {
+    try {
+      await AuthService()
+          .signInWithFacebook(); // Call signInWithGoogle from AuthService
+      // Navigate to the forum page after successful sign-in
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => Forum()),
+      );
+    } catch (e) {
+      print("Error signing in with Facebook: $e");
+      // Handle sign-in errors here
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -276,7 +291,9 @@ class _LoginState extends State<Login> {
 
                       // facebook button
                       SquareTile(
-                          onTap: () => {},
+                          onTap: () async {
+                            await _signInWithFacebook();
+                          },
                           imagePath: 'assets/images/facebook.png')
                     ],
                   ),
